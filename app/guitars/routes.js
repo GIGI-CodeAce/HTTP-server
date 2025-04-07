@@ -1,8 +1,10 @@
 import { Router } from "express"
-import { listGuitars,showguitars } from "./controller.js"
+import { createGuitar, listGuitars,showguitars, storeGuitars } from "./controller.js"
 
 export const routes = new Router()
 
 
 routes.get('/', listGuitars)
+routes.post('/', storeGuitars)
+routes.get('/create', createGuitar)
 routes.get('/:id',showguitars)

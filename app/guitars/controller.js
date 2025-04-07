@@ -1,5 +1,9 @@
-import { getAll,getById,getByMake, guitars } from "./model.js"
+import { addGuitar,getAll,getById,getByMake, guitars } from "./model.js"
 import { view } from "./view.js";
+
+export async function createGuitar(req,res){
+    res.send(view('form'))
+}
 
 export async function listGuitars(req,res){
     const guitars = await getAll()
@@ -25,5 +29,19 @@ export async function showguitars(req, res) {
         } else {
             res.send(view('list', {guitars: found, title: `Guitars made by ${found[0].make}`}));
         }
+    }
+}
+
+export async function storeGuitars(req, res) {
+    const { guitar_make, guitar_model } = req.body;
+
+    const make = guitar_make?.trim();
+    const model = guitar_model?.trim();
+
+    if (make && model) {
+        await addGuitar(make, model);
+        res.redirect('/guitars');
+    } else {
+        res.redirect('/guitars/create');
     }
 }

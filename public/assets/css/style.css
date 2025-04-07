@@ -1,0 +1,11 @@
+body{
+    background-color: hsl(0, 0%, 10%);
+    font-size: 1.2rem;
+    color: white;
+}
+a{
+    color: pink;
+}
+a:hover{
+    color: hsl(350, 100%, 77%);
+}

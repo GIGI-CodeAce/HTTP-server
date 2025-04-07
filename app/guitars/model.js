@@ -3,12 +3,21 @@ function newId(){
     return id++
 }
 
-
 export const guitars = [
     {id: newId(), make: 'Fender', model: 'Strat'},
     {id: newId(), make: 'PRS', model: 'Starla'},
     {id: newId(), make: 'BMW', model: 'Les Paul'},
 ]
+
+export function addGuitar(make,model){
+    const guitar = {
+        id: newId(), make: make, model: model
+    }
+
+    guitars.push(guitar)
+
+    return Promise.resolve(guitar)
+}
 
 export function getAll(){
     return Promise.resolve(guitars)
