@@ -1,8 +1,10 @@
-import { getAll,getById,getByMake } from "./model.js"
+import { getAll,getById,getByMake, guitars } from "./model.js"
+import { view } from "./view.js";
 
 export async function listGuitars(req,res){
     const guitars = await getAll()
-    res.send(guitars)
+    const html = view('list', { guitars, title: 'My Guitars' });
+    res.send(html)
 }
 
 export async function showguitars(req, res) {
@@ -14,14 +16,14 @@ export async function showguitars(req, res) {
         if (!guitar) {
             res.status(404).send('Guitar not found');
         } else {
-            res.send(guitar);
+            res.send(view('show', guitar))
         }
     } else {
         const found = await getByMake(param);
         if (found.length === 0) {
             res.status(404).send('Guitar not found');
         } else {
-            res.send(found);
+            res.send(view('list', {guitars: found, title: `Guitars made by ${found[0].make}`}));
         }
     }
 }
