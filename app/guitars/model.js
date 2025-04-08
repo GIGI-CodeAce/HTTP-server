@@ -33,3 +33,8 @@ export function getByMake(make){
 
     return Promise.resolve(found)
 }
+
+export function saveGuitar(guitar){
+
+    return Promise.resolve(true)
+}

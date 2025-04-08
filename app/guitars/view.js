@@ -1,12 +1,21 @@
 const views = {
-    form(){
+    form(guitar){
+        let action = '/guitars',
+        make = '', model = ''
+
+        if(guitar){
+            action = `/guitars/${guitar.id}`
+            make = guitar.make
+            model = guitar.model
+        }
+
         return this._layout(` 
-    <form method="post" action="/guitars">
+    <form method="post" action="${action}">
     <div>
-        Make: <input type="text" name="guitar_make" />
+        Make: <input type="text" name="guitar_make" value="${make}"/>
     </div>
     <div>
-        Model: <input type="text" name="guitar_model" />
+        Model: <input type="text" name="guitar_model" value="${model}" />
     </div>
     <div>
         <button type="submit">Save</button>
@@ -29,6 +38,10 @@ const views = {
         return this._layout(`
             <span>Guitar with the id of ${guitar.id}</span>
             <h2>${guitar.make} ${guitar.model}</h2>
+            <div class="redirectShortcut">
+                <h4><a href="/guitars">Guitars list</a></h4>
+                <h4><a href="/guitars/${guitar.id}/edit">Edit guitar</a></h4>
+            </div>
         `);
     },
     _layout(content){

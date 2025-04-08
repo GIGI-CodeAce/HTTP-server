@@ -9,3 +9,9 @@ a{
 a:hover{
     color: hsl(350, 100%, 77%);
 }
+.redirectShortcut{
+    display: flex;
+}
+.redirectShortcut h4{
+    margin-right: 11px;
+}
