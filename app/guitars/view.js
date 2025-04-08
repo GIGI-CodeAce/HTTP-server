@@ -39,8 +39,9 @@ const views = {
             <span>Guitar with the id of ${guitar.id}</span>
             <h2>${guitar.make} ${guitar.model}</h2>
             <div class="redirectShortcut">
-                <h4><a href="/guitars">Guitars list</a></h4>
                 <h4><a href="/guitars/${guitar.id}/edit">Edit guitar</a></h4>
+                <h4><a href="/guitars/${guitar.id}/delete">Delete guitar</a></h4>
+                <h4><a href="/guitars">Guitars list</a></h4>
             </div>
         `);
     },
