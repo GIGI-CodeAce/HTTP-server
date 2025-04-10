@@ -1,19 +1,10 @@
 import { Router } from "express"
+import { checkAuth } from "../auth/controller.js"
 import { createGuitar,editGuitar,deleteGuitar,updateGuitar, listGuitars,showguitars, storeGuitars } from "./controller.js"
 
 export const routes = new Router()
 
-function checkAuth(req,res,next){
-    let isAuth = false
-
-    if(isAuth){
-        next()
-    }else{
-        res.redirect('/login')
-    }
-  }
-
-routes.get('/',checkAuth, listGuitars)
+routes.get('/', listGuitars)
 routes.post('/',checkAuth, storeGuitars)
 routes.get('/create',checkAuth, createGuitar)
 routes.get('/:id/edit',checkAuth, editGuitar)

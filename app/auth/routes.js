@@ -1,7 +1,8 @@
 import { request, Router } from "express";
-import {showLogin, auth} from './controller.js'
+import {showLogin,logOut, auth} from './controller.js'
 
 export const routes = new Router()
 
-routes.get('/', showLogin)
-routes.post('/', auth)
+routes.get('/login', showLogin)
+routes.post('/login', auth)
+routes.get('/logout', logOut)

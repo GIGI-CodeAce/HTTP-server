@@ -8,17 +8,31 @@ export function auth(req,res){
     const {email, password} = req.body
 
     if(!email || !password){
-        
         res.redirect('/login')
         return
     }
     if(email.toLowerCase() === 'admin@admin.com' && password === 'pass'){
-         //
-         console.log('what');
-         
+        req.session.user = {
+            email,
+            isAuth: true
+        }
         res.redirect('/guitars')
     }else{
-        console.log('what');
         res.redirect('/login')
     }
 }
+
+export function logOut(req,res){
+    req.session.destroy()
+    res.redirect('/')
+}
+
+export function checkAuth(req,res,next){
+    let isAuth = req.session.user && req.session.user.isAuth
+
+    if(isAuth){
+        next()
+    }else{
+        res.redirect('/login')
+    }
+  }

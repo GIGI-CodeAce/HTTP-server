@@ -1,6 +1,7 @@
 import express from 'express'
 import { routes as guitarRoutes } from './guitars/routes.js';
 import { routes as authRoutes } from './auth/routes.js';
+import session from 'express-session'
 
 const app = express();
 const port = 3000
@@ -8,8 +9,14 @@ const port = 3000
 app.use(express.static('./public'))
 app.use(express.urlencoded({extended: false}))
 
+app.use(session({
+  secret: 'fuch them hackers',
+  saveUninitialized: false,
+  resave: false
+}))
+
 app.use('/guitars', guitarRoutes)
-app.use('/login', authRoutes)
+app.use('/', authRoutes)
 
 app.get('/', (req, res) => {
   res.send(`
