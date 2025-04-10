@@ -3,11 +3,20 @@ import { createGuitar,editGuitar,deleteGuitar,updateGuitar, listGuitars,showguit
 
 export const routes = new Router()
 
+function checkAuth(req,res,next){
+    let isAuth = false
 
-routes.get('/', listGuitars)
-routes.post('/', storeGuitars)
-routes.get('/create', createGuitar)
-routes.get('/:id/edit', editGuitar)
-routes.get('/:id/delete', deleteGuitar)
-routes.get('/:id',showguitars)
-routes.post('/:id', updateGuitar)
+    if(isAuth){
+        next()
+    }else{
+        res.redirect('/login')
+    }
+  }
+
+routes.get('/',checkAuth, listGuitars)
+routes.post('/',checkAuth, storeGuitars)
+routes.get('/create',checkAuth, createGuitar)
+routes.get('/:id/edit',checkAuth, editGuitar)
+routes.get('/:id/delete',checkAuth, deleteGuitar)
+routes.get('/:id',checkAuth,showguitars)
+routes.post('/:id',checkAuth, updateGuitar)

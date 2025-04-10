@@ -1,5 +1,7 @@
 import express from 'express'
 import { routes as guitarRoutes } from './guitars/routes.js';
+import { routes as authRoutes } from './auth/routes.js';
+
 const app = express();
 const port = 3000
 
@@ -7,6 +9,7 @@ app.use(express.static('./public'))
 app.use(express.urlencoded({extended: false}))
 
 app.use('/guitars', guitarRoutes)
+app.use('/login', authRoutes)
 
 app.get('/', (req, res) => {
   res.send(`
